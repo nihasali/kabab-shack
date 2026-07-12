@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kebab Shack — Multi Cuisine Restaurant | Kalpetta, Wayanad</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f3dab1;
+    --bg-panel:#ecd09e;
+    --bg-panel-2:#e6c78e;
+    --gold:#631425;
+    --gold-bright:#7d1c31;
+    --gold-dim:#96574a;
+    --ivory:#231f20;
+    --ivory-dim:#5c4f42;
+    --line:rgba(99,20,37,0.2);
+    --line-strong:rgba(99,20,37,0.42);
+    --veg:#4b6b3a;
+    --nonveg:#a6472b;
+    --maxw:1180px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+
+  body{
+    margin:0;
+    background:
+      radial-gradient(ellipse at 20% 0%, rgba(99,20,37,0.05), transparent 45%),
+      radial-gradient(ellipse at 80% 10%, rgba(99,20,37,0.04), transparent 40%),
+      var(--bg);
+    color:var(--ivory);
+    font-family:'Jost', sans-serif;
+    font-weight:300;
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  h1,h2,h3,.display{
+    font-family:'Cormorant Garamond', serif;
+    font-weight:600;
+    letter-spacing:0.01em;
+    margin:0;
+  }
+
+  a{color:inherit;}
+
+  /* ---------- Jali pattern (signature motif) ---------- */
+  .jali-bg{
+    position:absolute;
+    inset:0;
+    opacity:0.35;
+    pointer-events:none;
+    z-index:0;
+  }
+
+  /* ---------- Top bar ---------- */
+  .topbar{
+    background:var(--bg-panel);
+    border-bottom:1px solid var(--line);
+    padding:8px 24px;
+    text-align:center;
+    font-size:12px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--ivory-dim);
+  }
+  .topbar span{color:var(--gold);}
+
+  /* ---------- Header / Hero ---------- */
+  header.hero{
+    position:relative;
+    overflow:hidden;
+    padding:28px 24px 72px;
+    text-align:center;
+    border-bottom:1px solid var(--line);
+  }
+
+  .brand-logo{
+    position:relative;
+    z-index:1;
+    display:block;
+    margin:0 auto 20px;
+    width:min(180px, 40vw);
+    height:auto;
+    border-radius:50%;
+    box-shadow:0 8px 30px rgba(99,20,37,0.2);
+  }
+
+  .visually-hidden{
+    position:absolute;
+    width:1px; height:1px;
+    padding:0; margin:-1px;
+    overflow:hidden;
+    clip:rect(0,0,0,0);
+    white-space:nowrap;
+    border:0;
+  }
+
+  .brand-eyebrow{
+    position:relative;
+    z-index:1;
+    font-size:13px;
+    letter-spacing:0.35em;
+    text-transform:uppercase;
+    color:var(--gold-dim);
+    margin-bottom:18px;
+  }
+
+  .brand-name{
+    position:relative;
+    z-index:1;
+    font-size:clamp(52px, 10vw, 108px);
+    line-height:0.95;
+    color:var(--ivory);
+    text-shadow:0 0 30px rgba(99,20,37,0.1);
+  }
+  .brand-name em{
+    font-style:italic;
+    color:var(--gold-bright);
+  }
+
+  .brand-cuisines{
+    position:relative;
+    z-index:1;
+    margin-top:22px;
+    font-size:14px;
+    letter-spacing:0.3em;
+    text-transform:uppercase;
+    color:var(--ivory-dim);
+  }
+  .brand-cuisines .dot{color:var(--gold); margin:0 12px;}
+
+  .hero-rule{
+    position:relative;
+    z-index:1;
+    width:120px;
+    height:1px;
+    background:var(--gold-dim);
+    margin:32px auto;
+  }
+  .hero-rule::after{
+    content:'';
+    position:absolute;
+    top:-4px; left:50%;
+    transform:translateX(-50%) rotate(45deg);
+    width:8px; height:8px;
+    background:var(--gold);
+  }
+
+  .hero-tagline{
+    position:relative;
+    z-index:1;
+    max-width:520px;
+    margin:0 auto;
+    font-size:16px;
+    color:var(--ivory-dim);
+    font-weight:300;
+  }
+
+  .hero-loc{
+    position:relative;
+    z-index:1;
+    margin-top:26px;
+    font-size:13px;
+    letter-spacing:0.06em;
+    color:var(--gold);
+  }
+
+  /* ---------- Sticky nav ---------- */
+  nav.catnav{
+    position:sticky;
+    top:0;
+    z-index:50;
+    background:rgba(243,218,177,0.92);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  .catnav-inner{
+    max-width:var(--maxw);
+    margin:0 auto;
+    display:flex;
+    gap:4px;
+    overflow-x:auto;
+    padding:0 16px;
+    scrollbar-width:thin;
+    scrollbar-color:var(--gold-dim) transparent;
+  }
+  .catnav-inner::-webkit-scrollbar{height:4px;}
+  .catnav-inner::-webkit-scrollbar-thumb{background:var(--gold-dim);}
+
+  .catnav a{
+    flex:0 0 auto;
+    padding:16px 14px;
+    font-size:12.5px;
+    font-weight:600;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    text-decoration:none;
+    color:var(--ivory-dim);
+    border-bottom:2px solid transparent;
+    white-space:nowrap;
+    transition:color .2s ease, border-color .2s ease;
+  }
+  .catnav a:hover, .catnav a.active{
+    color:var(--gold-bright);
+    border-bottom-color:var(--gold);
+  }
+
+  /* ---------- Main layout ---------- */
+  main{max-width:var(--maxw); margin:0 auto; padding:0 24px;}
+
+  section.category{
+    padding:64px 0 24px;
+    border-bottom:1px solid var(--line);
+    scroll-margin-top:60px;
+  }
+  section.category:last-of-type{border-bottom:none;}
+
+  .cat-head{
+    display:flex;
+    align-items:baseline;
+    gap:18px;
+    margin-bottom:8px;
+  }
+  .cat-num{
+    font-family:'Cormorant Garamond', serif;
+    font-size:15px;
+    color:var(--gold-dim);
+    letter-spacing:0.05em;
+  }
+  .cat-title{
+    font-size:clamp(30px, 4vw, 42px);
+    color:var(--ivory);
+  }
+  .cat-sub{
+    font-size:13px;
+    color:var(--ivory-dim);
+    margin:6px 0 32px;
+    letter-spacing:0.02em;
+    max-width:640px;
+  }
+
+  .subgroup-title{
+    font-family:'Jost',sans-serif;
+    font-size:12px;
+    letter-spacing:0.22em;
+    text-transform:uppercase;
+    color:var(--gold);
+    margin:36px 0 16px;
+    display:flex;
+    align-items:center;
+    gap:12px;
+  }
+  .subgroup-title::after{
+    content:'';
+    flex:1;
+    height:1px;
+    background:var(--line);
+  }
+  .subgroup-title:first-child{margin-top:0;}
+
+  /* menu grid: simple name+price rows */
+  .menu-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:0 40px;
+  }
+  @media(max-width:720px){
+    .menu-grid{grid-template-columns:1fr;}
+  }
+
+  .menu-item{
+    display:flex;
+    align-items:baseline;
+    gap:8px;
+    padding:11px 0;
+    border-bottom:1px dotted rgba(99,20,37,0.24);
+  }
+  .item-name{
+    font-size:16px;
+    color:var(--ivory);
+    display:flex;
+    align-items:center;
+    gap:8px;
+  }
+  .item-note{
+    display:block;
+    font-size:12px;
+    color:var(--ivory-dim);
+    margin-top:2px;
+  }
+  .leader{
+    flex:1;
+    border-bottom:1px dotted rgba(99,20,37,0.32);
+    margin-bottom:4px;
+    min-width:12px;
+  }
+  .price{
+    font-family:'Cormorant Garamond', serif;
+    font-size:18px;
+    font-weight:600;
+    color:var(--gold-bright);
+    white-space:nowrap;
+  }
+  .price small{
+    font-family:'Jost',sans-serif;
+    font-size:11px;
+    color:var(--ivory-dim);
+    font-weight:400;
+    margin-left:2px;
+  }
+
+  .veg-dot, .nonveg-dot{
+    width:11px; height:11px;
+    border:1.4px solid var(--veg);
+    border-radius:2px;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    flex:0 0 auto;
+  }
+  .veg-dot::after{content:'';width:5px;height:5px;border-radius:50%;background:var(--veg);}
+  .nonveg-dot{border-color:var(--nonveg);}
+  .nonveg-dot::after{content:'';width:5px;height:5px;border-radius:50%;background:var(--nonveg);}
+
+  /* table-style pricing (Qtr/Half/Full) */
+  .price-table{width:100%; border-collapse:collapse; margin-bottom:8px;}
+  .price-table th{
+    font-size:11px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--gold-dim);
+    text-align:right;
+    font-weight:500;
+    padding:0 0 12px;
+  }
+  .price-table th:first-child{text-align:left;}
+  .price-table td{
+    padding:11px 0;
+    border-bottom:1px dotted rgba(99,20,37,0.24);
+    font-size:16px;
+  }
+  .price-table td.name{color:var(--ivory); display:flex; align-items:center; gap:8px;}
+  .price-table td.num{
+    text-align:right;
+    font-family:'Cormorant Garamond', serif;
+    font-size:17px;
+    font-weight:600;
+    color:var(--gold-bright);
+  }
+  .price-table td.num.na{color:var(--ivory-dim); font-family:'Jost',sans-serif; font-size:13px; font-weight:300;}
+
+  .table-wrap{overflow-x:auto;}
+
+  /* platters */
+  .platter-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:24px;
+    margin-top:8px;
+  }
+  @media(max-width:900px){.platter-grid{grid-template-columns:1fr;}}
+  .platter-card{
+    background:var(--bg-panel);
+    border:1px solid var(--line);
+    padding:28px 26px;
+    position:relative;
+  }
+  .platter-card::before{
+    content:'';
+    position:absolute; top:0; left:0; right:0; height:2px;
+    background:linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+  .platter-name{
+    font-size:24px;
+    color:var(--gold-bright);
+    margin-bottom:4px;
+  }
+  .platter-price{
+    font-family:'Cormorant Garamond',serif;
+    font-size:28px;
+    font-weight:700;
+    color:var(--ivory);
+    margin-bottom:16px;
+  }
+  .platter-price small{font-size:13px; color:var(--ivory-dim); font-family:'Jost',sans-serif; font-weight:300;}
+  .platter-list{
+    list-style:none;
+    padding:0; margin:0;
+    font-size:14px;
+    color:var(--ivory-dim);
+  }
+  .platter-list li{
+    padding:6px 0;
+    border-bottom:1px dotted rgba(99,20,37,0.2);
+  }
+  .platter-list li:last-child{border-bottom:none;}
+
+  /* legend */
+  .legend{
+    display:flex;
+    gap:22px;
+    font-size:12px;
+    color:var(--ivory-dim);
+    margin:18px 0 0;
+    flex-wrap:wrap;
+  }
+  .legend span{display:flex; align-items:center; gap:6px;}
+
+  /* footer */
+  footer{
+    margin-top:60px;
+    border-top:1px solid var(--line);
+    background:var(--bg-panel);
+    padding:56px 24px 32px;
+    text-align:center;
+  }
+  footer .f-name{
+    font-size:32px;
+    color:var(--gold-bright);
+    margin-bottom:10px;
+  }
+  footer .f-cuisines{
+    font-size:12px;
+    letter-spacing:0.28em;
+    text-transform:uppercase;
+    color:var(--ivory-dim);
+    margin-bottom:28px;
+  }
+  .f-info{
+    display:flex;
+    justify-content:center;
+    gap:48px;
+    flex-wrap:wrap;
+    font-size:14px;
+    color:var(--ivory);
+    margin-bottom:28px;
+  }
+  .f-info .label{
+    display:block;
+    font-size:11px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--gold-dim);
+    margin-bottom:6px;
+  }
+  .f-note{
+    font-size:11px;
+    color:var(--ivory-dim);
+    opacity:0.7;
+  }
+
+  ::selection{background:var(--gold); color:#f3dab1;}
+
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">Bypass Road, Kalpetta, Wayanad &nbsp;·&nbsp; <span>Open Daily</span> &nbsp;·&nbsp; Call 70 34 24 29 42</div>
+
+<header class="hero">
+  <svg class="jali-bg" viewBox="0 0 800 400" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <pattern id="jali" width="60" height="60" patternUnits="userSpaceOnUse">
+        <path d="M30 4 L56 30 L30 56 L4 30 Z" fill="none" stroke="#631425" stroke-width="0.6" opacity="0.55"/>
+        <circle cx="30" cy="30" r="4" fill="none" stroke="#631425" stroke-width="0.6" opacity="0.55"/>
+      </pattern>
+    </defs>
+    <rect width="800" height="400" fill="url(#jali)"/>
+  </svg>
+
+  <img class="brand-logo" src="kebab-shack-logo.png" alt="Kebab Shack — Multi Cuisine Restaurant logo">
+
+  <div class="brand-eyebrow">Multi Cuisine Restaurant</div>
+  <h1 class="brand-name visually-hidden">Kebab Shack</h1>
+  <div class="brand-cuisines">Indian <span class="dot">•</span> Arabic <span class="dot">•</span> Chinese</div>
+  <div class="hero-rule"></div>
+  <p class="hero-tagline">Kabab Shack - Not Just Kebabs.
+Your destination for Arabian Mandi, Grills, Chinese Favourites & Wayanad Flavours.</p>
+  <div class="hero-loc">BYPASS ROAD, KALPETTA, WAYANAD</div>
+</header>
+
+<nav class="catnav">
+  <div class="catnav-inner" id="catnav-inner">
+    <a href="#soups">Soups</a>
+    <a href="#salads">Salads</a>
+    <a href="#house-special">House Special</a>
+    <a href="#starters">Starters</a>
+    <a href="#kababs-rolls">Kababs &amp; Rolls</a>
+    <a href="#breads">Breads</a>
+    <a href="#seafood">Seafood</a>
+    <a href="#alfahm">Grills / Alfahm</a>
+    <a href="#mandi">Arabian Mandi</a>
+    <a href="#platters">Shack Platters</a>
+    <a href="#rice-thali">Rice &amp; Thali</a>
+    <a href="#biriyani">Biriyani</a>
+    <a href="#broasted">Broasted</a>
+    <a href="#fried-rice">Fried Rice</a>
+    <a href="#noodles">Noodles</a>
+    <a href="#gravies">Gravies &amp; Curry</a>
+    <a href="#drinks">Drinks</a>
+    <a href="#desserts">Desserts</a>
+  </div>
+</nav>
+
+<main>
+
+  <div class="legend">
+    <span><i class="veg-dot"></i> Vegetarian</span>
+    <span><i class="nonveg-dot"></i> Non-Vegetarian</span>
+    <span>APS — As Per Size/Season</span>
+    <span>All prices in ₹ · 5% GST applicable</span>
+  </div>
+
+  <!-- SOUPS -->
+  <section class="category" id="soups">
+    <div class="cat-head"><span class="cat-num">01</span><h2 class="cat-title">Soups</h2></div>
+    <p class="cat-sub">Served veg or non-veg — priced accordingly.</p>
+    <div class="table-wrap">
+      <table class="price-table">
+        <tr><th>Item</th><th>Veg</th><th>Non-Veg</th></tr>
+        <tr><td class="name"><span class="veg-dot"></span>Sweet Corn Soup</td><td class="num">150</td><td class="num">170</td></tr>
+        <tr><td class="name"><span class="veg-dot"></span>Hot n Sour</td><td class="num">150</td><td class="num">170</td></tr>
+        <tr><td class="name"><span class="veg-dot"></span>Manchow</td><td class="num">160</td><td class="num">180</td></tr>
+        <tr><td class="name"><span class="veg-dot"></span>Lemon Coriander</td><td class="num">160</td><td class="num">180</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <!-- SALADS -->
+  <section class="category" id="salads">
+    <div class="cat-head"><span class="cat-num">02</span><h2 class="cat-title">Salads</h2></div>
+    <div class="menu-grid">
+      <div class="menu-item"><span class="item-name"><span class="veg-dot"></span>Green Salad</span><span class="leader"></span><span class="price">120</span></div>
+      <div class="menu-item"><span class="item-name"><span class="veg-dot"></span>Pineapple Honey Mint Salad</span><span class="leader"></span><span class="price">190</span></div>
+      <div class="menu-item"><span class="item-name"><span class="veg-dot"></span>Cucumber Salad</span><span class="leader"></span><span class="price">70</span></div>
+      <div class="menu-item"><span class="item-name"><span class="veg-dot"></span>Onion Salad</span><span class="leader"></span><span class="price">40</span></div>
+    </div>
+  </section>
+
+  <!-- HOUSE SPECIAL -->
+  <section class="category" id="house-special">
+    <div class="cat-head"><span class="cat-num">03</span><h2 class="cat-title">House Special — Clay Oven</h2></div>
+    <p class="cat-sub">Straight from the tandoor.</p>
+    <div class="table-wrap">
+      <table class="price-table">
+        <tr><th>Item</th><th>Half</th><th>Full</th></tr>
+        <tr><td class="name"><span class="nonveg-dot"></span>Chicken Tikka</td><td class="num">180</td><td class="num">320</td></tr>
+        <tr><td class="name"><span class="nonveg-dot"></span>Afghani Chicken Tikka</td><td class="num">190</td><td class="num">340</td></tr>
+        <tr><td class="name"><span class="nonveg-dot"></span>Malai Chicken Tikka</td><td class="num">190</td><td class="num">340</td></tr>
+        <tr><td class="name"><span class="nonveg-dot"></span>Hariyali Chicken Tikka</td><td class="num">190</td><td class="num">340</td></tr>
+        <tr><td class="name"><span class="nonveg-dot"></span>Garlic Tikka</td><td class="num">210</td><td class="num">360</td></tr>
+        <tr><td class="name"><span class="nonveg-dot"></span>Peri Peri Tikka</td><td class="num">210</td><td class="num">360</td></tr>
+        <tr><td class="name"><span class="nonveg-dot"></span>Creamy Malai Tikka</td><td class="num">210</td><td class="num">360</td></tr>
+        <tr><td class="name"><span class="nonveg-dot"></span>Chicken Achari Tikka</td><td class="num">190</td><td class="num">340</td></tr>
+      </table>
+    </div>
+    <div class="subgroup-title">Veg</div>
+    <div class="menu-grid">
+      <div class="menu-item"><span class="item-name"><span class="veg-dot"></span>Paneer Tikka</span><span class="leader"></span><span class="price">360</span></div>
+      <div class="menu-item"><span class="item-name"><span class="veg-dot"></span>Paneer Malai Tikka</span><span class="leader"></span><span class="price">380</span></div>
+    </div>
+  </section>
+
+  <!-- STARTERS -->
+  <section class="category" id="starters">
+    <div class="cat-head"><span class="cat-num">04</span><h2 class="cat-title">Starters</h2></div>
+    <div class="menu-grid">
+      <div class="menu-item"><span class="item-name"><span class="veg-dot"></span>Salt &amp; Pepper Baby Corn</span><span class="leader"></span><span class="price">260</span></div>
+      <div class="menu-item"><span class="item-name"><span class="veg-dot"></span>Dry Chilli Baby Corn</span><span class="leader"></span><span class="price">250</span></div>
+      <div class="menu-item"><span class="item-name"><span class="veg-dot"></span>Dry Chilli Paneer</span><span class="leader"></span><span class="price">270</span></div>
+      <div class="menu-item"><span class="item-name"><span class="veg-dot"></span>Dry Chilli Mushroom</span><span class="leader"></span><span class="price">250</span></div>
+      <div class="menu-item"><span class="item-name"><span class="veg-dot"></span>Dry Gobi Manchurian</span><span class="leader"></span><span class="price">200</span></div>
+      <div class="menu-item"><span class="item-name"><span class="veg-dot"></span>Paneer 65</span><span class="leader"></span><span class="price">260</span></div>
+      <div class="menu-item"><span class="item-name"><span class="veg-dot"></span>Mushroom 65</span><span class="leader"></span><span class="price">220</span></div>
+      <div class="menu-item"><span class="item-name"><span class="veg-dot"></span>Gobi 65</span><span class="leader"></span><span class="price">190</span></div>
+      <div class="menu-item"><span class="item-name"><span class="veg-dot"></span>French Fries</span><span class="leader"></span><span class="price">100</span></div>
+      <div class="menu-item"><span class="item-name"><span class="veg-dot"></span>Peri Peri Fries</span><span class="leader"></span><span class="price">120</span></div>
+      <div class="menu-item"><span class="item-name"><span class="nonveg-dot"></span>Chicken Chilli Momos</span><span class="leader"></span><span class="price">160</span></div>
+      <div class="menu-item"><span class="item-name"><span class="nonveg-dot"></span>Steamed Chicken Momos</span><span class="leader"></span><span class="price">130</span></div>
+      <div class="menu-item"><span class="item-name"><span class="nonveg-dot"></span>Fried Chicken Momos</span><span class="leader"></span><span class="price">140</span></div>
+      <div class="menu-item"><span class="item-name"><span class="nonveg-dot"></span>Pepper Chicken Dry</span><span class="leader"></span><span class="price">330</span></div>
+      <div class="menu-item"><span class="item-name"><span class="nonveg-dot"></span>Chilly Chicken Dry</span><span class="leader"></span><span class="price">300</span></div>
+      <div class="menu-item"><span class="item-name"><span class="nonveg-dot"></span>Hot Garlic Prawns</span><span class="leader"></span><span class="price">360</span></div>
+      <div class="menu-item"><span class="item-name"><span class="nonveg-dot"></span>Dragon Chicken / Sizzler</span><span class="leader"></span><span class="price">320<small>/350</small></span></div>
+      <div class="menu-item"><span class="item-name"><span class="nonveg-dot"></span>Chemmeen Kondattam</span><span class="leader"></span><span class="price">380</span></div>
+      <div class="menu-item"><span class="item-name"><span class="nonveg-dot"></span>Chicken Kondattam</span><span class="leader"></span><span class="price">320</span></div>
+      <div class="menu-item"><span class="item-name"><span class="nonveg-dot"></span>Beef Kondattam</span><span class="leader"></span><span class="price">340</span></div>
+      <div class="menu-item"><span class="item-name"><span class="nonveg-dot"></span>Nuggets</span><span class="leader"></span><span class="price">160</span></div>
+      <div class="menu-item"><span class="item-name"><span class="nonveg-dot"></span>Chick Pop</span><span class="leader"></span><span class="price">190</span></div>
+      <div class="menu-item"><span class="item-name"><span class="nonveg-dot"></span>Lollipop</span><span class="leader"></span><span class="price">290</span></div>
+      <div class="menu-item"><span class="item-name"><span class="nonveg-dot"></span>Chicken 65</span><span class="leader"></span><span class="price">290</span></div>
+      <div class="menu-item"><span class="item-name"><span class="nonveg-dot"></span>Beef Dry Fry <small style="color:var(--ivory-dim)">[BDF]</small></span><span class="leader"></span><span class="price">260</span></div>
+    </div>
+  </section>
+
+  <!-- KABABS & ROLLS -->
+  <section class="category" id="kababs-rolls">
+    <div class="cat-head"><span class="cat-num">05</span><h2 class="cat-title">Kababs &amp; Rolls</h2></div>
+    <div class="subgroup-title">Kababs</div>
+    <div class="table-wrap">
+      <table class="price-table">
+        <tr><th>Item</th><th>Half</th><th>Full</th></tr>
+        <tr><td class="name"><span class="nonveg-dot"></span>Chicken Seekh Kabab</td><td class="num">190</td><td class="num">360</td></tr>
+        <tr><td class="name"><span class="nonveg-dot"></span>Beef Seekh Kabab</td><td class="num">200</td><td class="num">380</td></tr>
+      </table>
+    </div>
+    <div class="subgroup-title">Rolls</div>
+    <div class="menu-grid">
+      <div class="menu-item"><span class="item-name"><span class="veg-dot"></span>Falafel Roll</span><span class="leader"></span><span class="price">80</span></div>
+      <div class="menu-item"><span class="item-name"><span class="veg-dot"></span>Paneer Tikka Roll</span><span class="leader"></span><span class="price">100</span></div>
+      <div class="menu-item"><span class="item-name"><span class="nonveg-dot"></span>Shack Special Tikka Roll</span><span class="leader"></span><span class="price">180</span></div>
+      <div class="menu-item"><span class="item-name"><span class="nonveg-dot"></span>Beef Seekh Kabab Roll</span><span class="leader"></span><span class="price">180</span></div>
+      <div class="menu-item"><span class="item-name"><span class="nonveg-dot"></span>Chicken Seekh Kabab Roll</span><span class="leader"></span><span class="price">160</span></div>
+    </div>
+  </section>
+
+  <!-- BREADS -->
+  <section class="category" id="breads">
+    <div class="cat-head"><span class="cat-num">06</span><h2 class="cat-title">Breads</h2></div>
+    <div class="menu-grid">
+      <div class="menu-item"><span class="item-name"><span class="veg-dot"></span>Kerala Porotta</span><span class="leader"></span><span class="price">18</span></div>
+      <div class="menu-item"><span class="item-name"><span class="veg-dot"></span>Wheat Porotta</span><span class="leader"></span><span class="price">22</span></div>
+      <div class="menu-item"><span class="item-name"><span class="veg-dot"></span>Butter Naan</span><span class="leader"></span><span class="price">45</span></div>
+      <div class="menu-item"><span class="item-name"><span class="veg-dot"></span>Plain Naan</span><span class="leader"></span><span class="price">40</span></div>
+      <div class="menu-item"><span class="item-name"><span class="veg-dot"></span>Garlic Naan</span><span class="leader"></span><span class="price">65</span></div>
+      <div class="menu-item"><span class="item-name"><span class="veg-dot"></span>Kulcha</span><span class="leader"></span><span class="price">60</span></div>
+      <div class="menu-item"><span class="item-name"><span class="veg-dot"></span>Chapathi</span><span class="leader"></span><span class="price">15</span></div>
+      <div class="menu-item"><span class="item-name"><span class="veg-dot"></span>Rumali Roti</span><span class="leader"></span><span class="price">22</span></div>
+      <div class="menu-item"><span class="item-name"><span class="veg-dot"></span>Tandoori Roti</span><span class="leader"></span><span class="price">35</span></div>
+      <div class="menu-item"><span class="item-name"><span class="veg-dot"></span>Butter Roti</span><span class="leader"></span><span class="price">40</span></div>
+    </div>
+  </section>
+
+  <!-- SEAFOOD -->
+  <section class="category" id="seafood">
+    <div class="cat-head"><span class="cat-num">07</span><h2 class="cat-title">Seafood</h2></div>
+    <div class="menu-grid">
+      <div class="menu-item"><span class="item-name"><span class="nonveg-dot"></span>Squid Roast</span><span class="leader"></span><span class="price">360</span></div>
+      <div class="menu-item"><span class="item-name"><span class="nonveg-dot"></span>Prawns Roast</span><span class="leader"></span><span class="price">360</span></div>
+      <div class="menu-item"><span class="item-name"><span class="nonveg-dot"></span>Prawns Masala</span><span class="leader"></span><span class="price">APS</span></div>
+      <div class="menu-item"><span class="item-name"><span class="nonveg-dot"></span>Fish Pollichath</span><span class="leader"></span><span class="price">APS</span></div>
+      <div class="menu-item"><span class="item-name"><span class="nonveg-dot"></span>Grilled Fish</span><span class="leader"></span><span class="price">APS</span></div>
+      <div class="menu-item"><span class="item-name"><span class="nonveg-dot"></span>Prawns Pepper Fry</span><span class="leader"></span><span class="price">APS</span></div>
+      <div class="menu-item"><span class="item-name"><span class="nonveg-dot"></span>Garlic Prawns</span><span class="leader"></span><span class="price">APS</span></div>
+      <div class="menu-item"><span class="item-name"><span class="nonveg-dot"></span>Prawns Tawa Fry</span><span class="leader"></span><span class="price">APS</span></div>
+    </div>
+  </section>
+
+  <!-- GRILLS / ALFAHM -->
+  <section class="category" id="alfahm">
+    <div class="cat-head"><span class="cat-num">08</span><h2 class="cat-title">Grills / Alfahm</h2></div>
+    <div class="table-wrap">
+      <table class="price-table">
+        <tr><th>Item</th><th>Qtr</th><th>Half</th><th>Full</th></tr>
+        <tr><td class="name"><span class="nonveg-dot"></span>Alfahm</td><td class="num">159</td><td class="num">319</td><td class="num">599</td></tr>
+        <tr><td class="name"><span class="nonveg-dot"></span>Peri Peri Alfahm</td><td class="num">169</td><td class="num">329</td><td class="num">629</td></tr>
+        <tr><td class="name"><span class="nonveg-dot"></span>Honey Alfahm</td><td class="num">169</td><td class="num">329</td><td class="num">629</td></tr>
+        <tr><td class="name"><span class="nonveg-dot"></span>Kanthari Alfahm</td><td class="num">189</td><td class="num">349</td><td class="num">649</td></tr>
+        <tr><td class="name"><span class="nonveg-dot"></span>Lemon Pepper Alfahm</td><td class="num">189</td><td class="num">349</td><td class="num">649</td></tr>
+        <tr><td class="name"><span class="nonveg-dot"></span>Green Pepper Alfahm</td><td class="num">189</td><td class="num">349</td><td class="num">649</td></tr>
+        <tr><td class="name"><span class="nonveg-dot"></span>Musthani Juicy Alfahm</td><td class="num">189</td><td class="num">349</td><td class="num">649</td></tr>
+        <tr><td class="name"><span class="nonveg-dot"></span>Shack Chicken Pollichath</td><td class="num">189</td><td class="num">329</td><td class="num">649</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <!-- ARABIAN MANDI -->
+  <section class="category" id="mandi">
+    <div class="cat-head"><span class="cat-num">09</span><h2 class="cat-title">Arabian Mandi</h2></div>
+    <div class="table-wrap">
+      <table class="price-table">
+        <tr><th>Item</th><th>Qtr</th><th>Half</th><th>Full</th></tr>
+        <tr><td class="name"><span class="veg-dot"></span>Mandi Rice</td><td class="num">120</td><td class="num">220</td><td class="num na">APS</td></tr>
+        <tr><td class="name"><span class="nonveg-dot"></span>Grilled Fish Mandi</td><td class="num na">—</td><td class="num na">—</td><td class="num">1229</td></tr>
+        <tr><td class="name"><span class="nonveg-dot"></span>Beef Mandi</td><td class="num">369</td><td class="num">649</td><td class="num">790</td></tr>
+        <tr><td class="name"><span class="nonveg-dot"></span>Alfahm Mandi</td><td class="num">240</td><td class="num">450</td><td class="num">840</td></tr>
+        <tr><td class="name"><span class="nonveg-dot"></span>Peri Peri Alfahm Mandi</td><td class="num">250</td><td class="num">470</td><td class="num">840</td></tr>
+        <tr><td class="name"><span class="nonveg-dot"></span>Honey Alfahm Mandi</td><td class="num">250</td><td class="num">470</td><td class="num">949</td></tr>
+        <tr><td class="name"><span class="nonveg-dot"></span>Kanthari Alfahm Mandi</td><td class="num">289</td><td class="num">539</td><td class="num">949</td></tr>
+        <tr><td class="name"><span class="nonveg-dot"></span>Lemon Pepper Alfahm Mandi</td><td class="num">289</td><td class="num">539</td><td class="num">949</td></tr>
+        <tr><td class="name"><span class="nonveg-dot"></span>Green Pepper Alfahm Mandi</td><td class="num">289</td><td class="num">539</td><td class="num">949</td></tr>
+        <tr><td class="name"><span class="nonveg-dot"></span>Musthani Juicy Alfahm Mandi</td><td class="num">289</td><td class="num">539</td><td class="num">959</td></tr>
+        <tr><td class="name"><span class="nonveg-dot"></span>Shack Chicken Pollichath Mandi</td><td class="num">299</td><td class="num">549</td><td class="num">989</td></tr>
+        <tr><td class="name"><span class="nonveg-dot"></span>Special Mix Mandi <span class="item-note" style="margin:0 0 0 4px;">(Normal, Kanthari, Peri Peri, Musthani)</span></td><td class="num na">—</td><td class="num">390</td><td class="num na">—</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <!-- SHACK PLATTERS -->
+  <section class="category" id="platters">
+    <div class="cat-head"><span class="cat-num">10</span><h2 class="cat-title">Shack Platters</h2></div>
+    <p class="cat-sub">Built to share.</p>
+    <div class="platter-grid">
+      <div class="platter-card">
+        <div class="platter-name">Mini Platter</div>
+        <div class="platter-price">₹599</div>
+        <ul class="platter-list">
+          <li>Normal Tikka — 2 pcs</li>
+          <li>Afghani Tikka — 2 pcs</li>
+          <li>Hariyali Tikka — 2 pcs</li>
+          <li>Creamy Malai Tikka — 2 pcs</li>
+          <li>Chicken Seekh Kabab — 1 pc</li>
+          <li>Beef Seekh Kabab — 1 pc</li>
+          <li>Rumali Roti — 2 pcs</li>
+        </ul>
+      </div>
+      <div class="platter-card">
+        <div class="platter-name">Shack Platter</div>
+        <div class="platter-price">₹899</div>
+        <ul class="platter-list">
+          <li>Normal Tikka — 4 pcs</li>
+          <li>Afghani Tikka — 4 pcs</li>
+          <li>Hariyali Tikka — 4 pcs</li>
+          <li>Creamy Malai Tikka — 4 pcs</li>
+          <li>Chicken Seekh Kabab — 1 pc</li>
+          <li>Beef Seekh Kabab — 1 pc</li>
+          <li>Rumali Roti — 4 pcs</li>
+        </ul>
+      </div>
+      <div class="platter-card">
+        <div class="platter-name">Shack Mega Platter</div>
+        <div class="platter-price">₹1499</div>
+        <ul class="platter-list">
+          <li>Normal Tikka — 6 pcs</li>
+          <li>Afghani Tikka — 6 pcs</li>
+          <li>Hariyali Tikka — 6 pcs</li>
+          <li>Malai Tikka — 6 pcs</li>
+          <li>Chicken Seekh Kabab — 2 pcs</li>
+          <li>Beef Seekh Kabab — 2 pcs</li>
+          <li>Beef Grilled — 2 pcs</li>
+          <li>French Fries</li>
+          <li>1 Soft Drink</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- RICE & THALI -->
+  <section class="category" id="rice-thali">
+    <div class="cat-head"><span class="cat-num">11</span><h2 class="cat-title">South Thali Meals &amp; Rice</h2></div>
+    <p class="cat-sub">Lunch specials.</p>
+    <div class="menu-grid">
+      <div class="menu-item"><span class="item-name"><span class="veg-dot"></span>South Thali Meals <small style="color:var(--ivory-dim)">(Lunch)</small></span><span class="leader"></span><span class="price">130</span></div>
+      <div class="menu-item"><span class="item-name"><span class="veg-dot"></span>Lemon Rice / Jeera Rice</span><span class="leader"></span><span class="price">150</span></div>
+      <div class="menu-item"><span class="item-name"><span class="veg-dot"></span>Ghee Rice</span><span class="leader"></span><span class="price">120</span></div>
+      <div class="menu-item"><span class="item-name"><span class="veg-dot"></span>Curd Rice</span><span class="leader"></span><span class="price">130</span></div>
+    </div>
+  </section>
+
+  <!-- BIRIYANI -->
+  <section class="category" id="biriyani">
+    <div class="cat-head"><span class="cat-num">12</span><h2 class="cat-title">Biriyani</h2></div>
+    <div class="table-wrap">
+      <table class="price-table">
+        <tr><th>Item</th><th>Half</th><th>Full</th></tr>
+        <tr><td class="name"><span class="nonveg-dot"></span>Chicken Biriyani</td><td class="num">130</td><td class="num">200</td></tr>
+      </table>
+    </div>
+    <div class="menu-grid">
+      <div class="menu-item"><span class="item-name"><span class="nonveg-dot"></span>Hyderabad Chicken Biriyani</span><span class="leader"></span><span class="price">260</span></div>
+      <div class="menu-item"><span class="item-name"><span class="nonveg-dot"></span>Chicken Tikka Biriyani</span><span class="leader"></span><span class="price">280</span></div>
+      <div class="menu-item"><span class="item-name"><span class="nonveg-dot"></span>Chilli Chicken Biriyani</span><span class="leader"></span><span class="price">240</span></div>
+      <div class="menu-item"><span class="item-name"><span class="nonveg-dot"></span>Beef Biriyani</span><span class="leader"></span><span class="price">220</span></div>
+      <div class="menu-item"><span class="item-name"><span class="nonveg-dot"></span>Fish Biriyani</span><span class="leader"></span><span class="price">APS</span></div>
+      <div class="menu-item"><span class="item-name"><span class="nonveg-dot"></span>Prawns Biriyani</span><span class="leader"></span><span class="price">340</span></div>
+    </div>
+  </section>
+
+  <!-- BROASTED -->
+  <section class="category" id="broasted">
+    <div class="cat-head"><span class="cat-num">13</span><h2 class="cat-title">Broasted Chicken</h2></div>
+    <div class="menu-grid">
+      <div class="menu-item"><span class="item-name"><span class="nonveg-dot"></span>Broasted Chicken Half <small style="color:var(--ivory-dim)">[5 pcs]</small></span><span class="leader"></span><span class="price">290</span></div>
+      <div class="menu-item"><span class="item-name"><span class="nonveg-dot"></span>Broasted Chicken Full <small style="color:var(--ivory-dim)">[10 pcs]</small></span><span class="leader"></span><span class="price">550</span></div>
+    </div>
+  </section>
+
+  <!-- FRIED RICE -->
+  <section class="category" id="fried-rice">
+    <div class="cat-head"><span class="cat-num">14</span><h2 class="cat-title">Fried Rice</h2></div>
+    <div class="menu-grid">
+      <div class="menu-item"><span class="item-name"><span class="veg-dot"></span>Veg Fried Rice</span><span class="leader"></span><span class="price">160</span></div>
+      <div class="menu-item"><span class="item-name"><span class="veg-dot"></span>Paneer Fried Rice</span><span class="leader"></span><span class="price">220</span></div>
+      <div class="menu-item"><span class="item-name"><span class="veg-dot"></span>Schezwan Veg Fried Rice</span><span class="leader"></span><span class="price">190</span></div>
+      <div class="menu-item"><span class="item-name"><span class="nonveg-dot"></span>Egg Fried Rice</span><span class="leader"></span><span class="price">170</span></div>
+      <div class="menu-item"><span class="item-name"><span class="nonveg-dot"></span>Chicken Fried Rice</span><span class="leader"></span><span class="price">200</span></div>
+      <div class="menu-item"><span class="item-name"><span class="nonveg-dot"></span>Mixed Fried Rice</span><span class="leader"></span><span class="price">250</span></div>
+      <div class="menu-item"><span class="item-name"><span class="nonveg-dot"></span>Prawns Fried Rice</span><span class="leader"></span><span class="price">270</span></div>
+      <div class="menu-item"><span class="item-name"><span class="nonveg-dot"></span>Schezwan Chicken Fried Rice</span><span class="leader"></span><span class="price">230</span></div>
+    </div>
+  </section>
+
+  <!-- NOODLES -->
+  <section class="category" id="noodles">
+    <div class="cat-head"><span class="cat-num">15</span><h2 class="cat-title">Noodles</h2></div>
+    <div class="menu-grid">
+      <div class="menu-item"><span class="item-name"><span class="veg-dot"></span>Veg Noodles</span><span class="leader"></span><span class="price">160</span></div>
+      <div class="menu-item"><span class="item-name"><span class="veg-dot"></span>Paneer Noodles</span><span class="leader"></span><span class="price">220</span></div>
+      <div class="menu-item"><span class="item-name"><span class="veg-dot"></span>Schezwan Veg Noodles</span><span class="leader"></span><span class="price">190</span></div>
+      <div class="menu-item"><span class="item-name"><span class="nonveg-dot"></span>Egg Noodles</span><span class="leader"></span><span class="price">170</span></div>
+      <div class="menu-item"><span class="item-name"><span class="nonveg-dot"></span>Chicken Noodles</span><span class="leader"></span><span class="price">200</span></div>
+      <div class="menu-item"><span class="item-name"><span class="nonveg-dot"></span>Mixed Noodles</span><span class="leader"></span><span class="price">250</span></div>
+      <div class="menu-item"><span class="item-name"><span class="nonveg-dot"></span>Prawns Noodles</span><span class="leader"></span><span class="price">270</span></div>
+      <div class="menu-item"><span class="item-name"><span class="nonveg-dot"></span>Schezwan Chicken Noodles</span><span class="leader"></span><span class="price">230</span></div>
+    </div>
+  </section>
+
+  <!-- GRAVIES -->
+  <section class="category" id="gravies">
+    <div class="cat-head"><span class="cat-num">16</span><h2 class="cat-title">Gravies &amp; Curry</h2></div>
+    <div class="subgroup-title">Veg</div>
+    <div class="menu-grid">
+      <div class="menu-item"><span class="item-name"><span class="veg-dot"></span>Paneer Butter Masala</span><span class="leader"></span><span class="price">240</span></div>
+      <div class="menu-item"><span class="item-name"><span class="veg-dot"></span>Paneer Manchurian</span><span class="leader"></span><span class="price">250</span></div>
+      <div class="menu-item"><span class="item-name"><span class="veg-dot"></span>Kadai Paneer</span><span class="leader"></span><span class="price">230</span></div>
+      <div class="menu-item"><span class="item-name"><span class="veg-dot"></span>Paneer Pepper Fry</span><span class="leader"></span><span class="price">260</span></div>
+      <div class="menu-item"><span class="item-name"><span class="veg-dot"></span>Mushroom Masala</span><span class="leader"></span><span class="price">220</span></div>
+      <div class="menu-item"><span class="item-name"><span class="veg-dot"></span>Chilli Mushroom</span><span class="leader"></span><span class="price">220</span></div>
+      <div class="menu-item"><span class="item-name"><span class="veg-dot"></span>Kadai Mushroom</span><span class="leader"></span><span class="price">220</span></div>
+      <div class="menu-item"><span class="item-name"><span class="veg-dot"></span>Mushroom Manchurian</span><span class="leader"></span><span class="price">230</span></div>
+      <div class="menu-item"><span class="item-name"><span class="veg-dot"></span>Gobi Manchurian</span><span class="leader"></span><span class="price">190</span></div>
+      <div class="menu-item"><span class="item-name"><span class="veg-dot"></span>Chilli Gobi</span><span class="leader"></span><span class="price">190</span></div>
+      <div class="menu-item"><span class="item-name"><span class="veg-dot"></span>Dal Tadka</span><span class="leader"></span><span class="price">170</span></div>
+      <div class="menu-item"><span class="item-name"><span class="veg-dot"></span>Dal Fry</span><span class="leader"></span><span class="price">140</span></div>
+      <div class="menu-item"><span class="item-name"><span class="veg-dot"></span>Green Peas Masala</span><span class="leader"></span><span class="price">160</span></div>
+      <div class="menu-item"><span class="item-name"><span class="veg-dot"></span>Vegetable Kuruma</span><span class="leader"></span><span class="price">140</span></div>
+    </div>
+    <div class="subgroup-title">Non-Veg</div>
+    <div class="menu-grid">
+      <div class="menu-item"><span class="item-name"><span class="nonveg-dot"></span>Chilli Chicken</span><span class="leader"></span><span class="price">300</span></div>
+      <div class="menu-item"><span class="item-name"><span class="nonveg-dot"></span>Garlic Chicken</span><span class="leader"></span><span class="price">320</span></div>
+      <div class="menu-item"><span class="item-name"><span class="nonveg-dot"></span>Chicken Kuruma</span><span class="leader"></span><span class="price">290</span></div>
+      <div class="menu-item"><span class="item-name"><span class="nonveg-dot"></span>Chicken Chettinad</span><span class="leader"></span><span class="price">360</span></div>
+      <div class="menu-item"><span class="item-name"><span class="nonveg-dot"></span>Butter Chicken</span><span class="leader"></span><span class="price">320</span></div>
+      <div class="menu-item"><span class="item-name"><span class="nonveg-dot"></span>Ginger Chicken</span><span class="leader"></span><span class="price">340</span></div>
+      <div class="menu-item"><span class="item-name"><span class="nonveg-dot"></span>Kadai Chicken</span><span class="leader"></span><span class="price">300</span></div>
+      <div class="menu-item"><span class="item-name"><span class="nonveg-dot"></span>Pepper Chicken</span><span class="leader"></span><span class="price">320</span></div>
+      <div class="menu-item"><span class="item-name"><span class="nonveg-dot"></span>Chicken Tikka Masala</span><span class="leader"></span><span class="price">360</span></div>
+      <div class="menu-item"><span class="item-name"><span class="nonveg-dot"></span>Beef Masala</span><span class="leader"></span><span class="price">260</span></div>
+      <div class="menu-item"><span class="item-name"><span class="nonveg-dot"></span>Beef Pepper Masala</span><span class="leader"></span><span class="price">300</span></div>
+      <div class="menu-item"><span class="item-name"><span class="nonveg-dot"></span>Nadan Beef Varattu</span><span class="leader"></span><span class="price">260</span></div>
+      <div class="menu-item"><span class="item-name"><span class="nonveg-dot"></span>Nadan Beef Curry</span><span class="leader"></span><span class="price">250</span></div>
+      <div class="menu-item"><span class="item-name"><span class="nonveg-dot"></span>Malanadan Chicken Curry</span><span class="leader"></span><span class="price">290</span></div>
+    </div>
+  </section>
+
+  <!-- DRINKS -->
+  <section class="category" id="drinks">
+    <div class="cat-head"><span class="cat-num">17</span><h2 class="cat-title">Drinks Menu</h2></div>
+
+    <div class="subgroup-title">Mojitos</div>
+    <div class="menu-grid">
+      <div class="menu-item"><span class="item-name">Green Apple Mojito</span><span class="leader"></span><span class="price">130</span></div>
+      <div class="menu-item"><span class="item-name">Blue Lagoon</span><span class="leader"></span><span class="price">140</span></div>
+      <div class="menu-item"><span class="item-name">Passion Fruit Mojito</span><span class="leader"></span><span class="price">140</span></div>
+      <div class="menu-item"><span class="item-name">Strawberry Mojito</span><span class="leader"></span><span class="price">120</span></div>
+      <div class="menu-item"><span class="item-name">Virgin Mojito</span><span class="leader"></span><span class="price">120</span></div>
+      <div class="menu-item"><span class="item-name">Watermelon Mojito</span><span class="leader"></span><span class="price">130</span></div>
+      <div class="menu-item"><span class="item-name">Lychee Mojito</span><span class="leader"></span><span class="price">130</span></div>
+    </div>
+
+    <div class="subgroup-title">Milk Shakes</div>
+    <div class="menu-grid">
+      <div class="menu-item"><span class="item-name">Sharjah</span><span class="leader"></span><span class="price">120</span></div>
+      <div class="menu-item"><span class="item-name">Dry Fruits</span><span class="leader"></span><span class="price">160</span></div>
+      <div class="menu-item"><span class="item-name">Pista</span><span class="leader"></span><span class="price">120</span></div>
+      <div class="menu-item"><span class="item-name">Chocolate</span><span class="leader"></span><span class="price">120</span></div>
+      <div class="menu-item"><span class="item-name">Tender Coconut</span><span class="leader"></span><span class="price">140</span></div>
+      <div class="menu-item"><span class="item-name">Avocado</span><span class="leader"></span><span class="price">140</span></div>
+      <div class="menu-item"><span class="item-name">Apple</span><span class="leader"></span><span class="price">120</span></div>
+      <div class="menu-item"><span class="item-name">Anar</span><span class="leader"></span><span class="price">140</span></div>
+      <div class="menu-item"><span class="item-name">Dates</span><span class="leader"></span><span class="price">160</span></div>
+      <div class="menu-item"><span class="item-name">Oreo Mix</span><span class="leader"></span><span class="price">140</span></div>
+      <div class="menu-item"><span class="item-name">Kit Kat</span><span class="leader"></span><span class="price">140</span></div>
+      <div class="menu-item"><span class="item-name">Lotus Biscoff</span><span class="leader"></span><span class="price">160</span></div>
+      <div class="menu-item"><span class="item-name">Nutella</span><span class="leader"></span><span class="price">140</span></div>
+    </div>
+
+    <div class="subgroup-title">Lemonades</div>
+    <div class="menu-grid">
+      <div class="menu-item"><span class="item-name">Fresh Lime</span><span class="leader"></span><span class="price">30</span></div>
+      <div class="menu-item"><span class="item-name">Mint Lime</span><span class="leader"></span><span class="price">40</span></div>
+      <div class="menu-item"><span class="item-name">Flavored Lime</span><span class="leader"></span><span class="price">40</span></div>
+      <div class="menu-item"><span class="item-name">Lime Soda</span><span class="leader"></span><span class="price">40</span></div>
+      <div class="menu-item"><span class="item-name">Flavored Lime Soda</span><span class="leader"></span><span class="price">45</span></div>
+    </div>
+
+    <div class="subgroup-title">Fresh Juice</div>
+    <div class="menu-grid">
+      <div class="menu-item"><span class="item-name">Anar Juice</span><span class="leader"></span><span class="price">120</span></div>
+      <div class="menu-item"><span class="item-name">Grape Juice</span><span class="leader"></span><span class="price">100</span></div>
+      <div class="menu-item"><span class="item-name">Orange / Musambi Juice</span><span class="leader"></span><span class="price">90</span></div>
+      <div class="menu-item"><span class="item-name">Pineapple Juice</span><span class="leader"></span><span class="price">90</span></div>
+      <div class="menu-item"><span class="item-name">Chiku Juice</span><span class="leader"></span><span class="price">90</span></div>
+      <div class="menu-item"><span class="item-name">Watermelon Juice</span><span class="leader"></span><span class="price">80</span></div>
+      <div class="menu-item"><span class="item-name">Apple Juice</span><span class="leader"></span><span class="price">100</span></div>
+      <div class="menu-item"><span class="item-name">Tender Coconut Juice</span><span class="leader"></span><span class="price">120</span></div>
+      <div class="menu-item"><span class="item-name">Mango Juice</span><span class="leader"></span><span class="price">100</span></div>
+      <div class="menu-item"><span class="item-name">Avocado Juice</span><span class="leader"></span><span class="price">120</span></div>
+      <div class="menu-item"><span class="item-name">Strawberry Juice</span><span class="leader"></span><span class="price">100</span></div>
+    </div>
+
+    <div class="subgroup-title">Healthy Mix</div>
+    <div class="menu-grid">
+      <div class="menu-item"><span class="item-name">Summer Booster</span><span class="leader"></span><span class="price">130</span></div>
+      <div class="menu-item"><span class="item-name">Iron Booster</span><span class="leader"></span><span class="price">140</span></div>
+      <div class="menu-item"><span class="item-name">ABC Juice</span><span class="leader"></span><span class="price">130</span></div>
+      <div class="menu-item"><span class="item-name">Liver Care</span><span class="leader"></span><span class="price">140</span></div>
+    </div>
+  </section>
+
+  <!-- DESSERTS -->
+  <section class="category" id="desserts">
+    <div class="cat-head"><span class="cat-num">18</span><h2 class="cat-title">Desserts</h2></div>
+    <div class="menu-grid">
+      <div class="menu-item"><span class="item-name">Royal Falooda</span><span class="leader"></span><span class="price">190</span></div>
+      <div class="menu-item"><span class="item-name">Galaxy Falooda</span><span class="leader"></span><span class="price">270</span></div>
+      <div class="menu-item"><span class="item-name">Monster Falooda</span><span class="leader"></span><span class="price">270</span></div>
+      <div class="menu-item"><span class="item-name">Brownie with Ice Cream</span><span class="leader"></span><span class="price">160</span></div>
+      <div class="menu-item"><span class="item-name">Sizzling Brownie with Ice Cream</span><span class="leader"></span><span class="price">190</span></div>
+      <div class="menu-item"><span class="item-name">Mango Falooda</span><span class="leader"></span><span class="price">220</span></div>
+      <div class="menu-item"><span class="item-name">Tender Falooda</span><span class="leader"></span><span class="price">220</span></div>
+      <div class="menu-item"><span class="item-name">Fruit Salad with Ice Cream</span><span class="leader"></span><span class="price">150</span></div>
+      <div class="menu-item"><span class="item-name">Cut Fruits</span><span class="leader"></span><span class="price">140</span></div>
+      <div class="menu-item"><span class="item-name">Fruit Salad</span><span class="leader"></span><span class="price">100</span></div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="f-name">Kabab Shack</div>
+  <div class="f-cuisines">Indian · Arabic · Chinese</div>
+  <div class="f-info">
+    <div><span class="label">Location</span>Bypass Road, Kalpetta, Wayanad</div>
+    <div><span class="label">Contact</span>70 34 24 29 42</div>
+    <div><span class="label">Hours</span>Open Daily</div>
+  </div>
+  <div class="f-note">Prices are subject to 5% GST · Menu items and prices subject to change without notice</div>
+</footer>
+
+<script>
+  // Active nav highlighting on scroll
+  const sections = document.querySelectorAll('section.category');
+  const navLinks = document.querySelectorAll('.catnav a');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      const id = entry.target.getAttribute('id');
+      const link = document.querySelector(`.catnav a[href="#${id}"]`);
+      if (entry.isIntersecting) {
+        navLinks.forEach(l => l.classList.remove('active'));
+        if (link) {
+          link.classList.add('active');
+          link.scrollIntoView({behavior:'smooth', inline:'center', block:'nearest'});
+        }
+      }
+    });
+  }, { rootMargin: '-20% 0px -70% 0px', threshold: 0 });
+
+  sections.forEach(s => observer.observe(s));
+</script>
+
+</body>
+</html>
